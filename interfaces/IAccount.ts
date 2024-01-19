@@ -1,8 +1,9 @@
 import { ICustomer } from "./ICustomer";
+import { ISale } from "./ISale";
 import { ITransaction } from "./ITransaction";
 // agregar deuda total y deuda actual
 export interface IAccount {
-    id: string;
+    _id: string;
     name: string;
     description: string;
     createdAt: Date;
@@ -11,4 +12,14 @@ export interface IAccount {
     totalDebt: number;
     currentDebt: number;
     transactions: ITransaction[];
+    status: eAccountStatus;
+    sale: ISale;
+    active: boolean;
+}
+
+export enum eAccountStatus {
+    paid = "Pagado",
+    pending = "Pendiente",
+    partial = "Parcial",
+    canceled = "Cancelado"
 }

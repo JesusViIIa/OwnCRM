@@ -1,5 +1,5 @@
 import { Schema, model } from "mongoose";
-import { IAccount } from "../interfaces/IAccount";
+import { IAccount, eAccountStatus } from "../interfaces/IAccount";
 const accountSchema = new Schema<IAccount>({
     transactions: [{
         type: Schema.Types.ObjectId,
@@ -24,7 +24,21 @@ const accountSchema = new Schema<IAccount>({
         type: Date,
         default: Date.now
     },
-    updatedAt: Date
+    updatedAt: Date,
+    sale: {
+        type: Schema.Types.ObjectId,
+        ref: "Sale"
+    },
+    active: {
+        type: Boolean,
+        default: true
+    },
+    status:{
+        type: String,
+        enum: eAccountStatus,
+        default: eAccountStatus.pending
+    
+    }
 }, {
     timestamps: true
 })

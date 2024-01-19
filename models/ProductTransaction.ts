@@ -1,10 +1,14 @@
 // modelos para mongoDB
 import { Schema, model } from "mongoose";
-import { IProductTransaction } from "../interfaces/IProductTransaction";
+import { IProductTransaction, eProductTransactionType } from "../interfaces/IProductTransaction";
 const productTransactionSchema = new Schema<IProductTransaction>({
   description: String,
   quantity: Number,
-  type: String,
+  type: {
+    type: String,
+    enum: eProductTransactionType,
+    default: eProductTransactionType.CREATE,
+  },
   createdAt: {
     type: Date,
     default: Date.now

@@ -9,20 +9,21 @@ import { IProduct } from "./IProduct";
 
 // la venta tiene un status con un enum
 export interface ISale {
-    id: string;
+    _id: string;
     customer: ICustomer;
     products: IProduct[];
     total: number;
     paid: number;
     debt: IAccount;
     totalProducts: number;
-    status: SaleStatus;
+    status: eSaleStatus;
     createdAt: Date;
     updatedAt: Date;
+    active: boolean;
 }
 
 
-export enum SaleStatus {
+export enum eSaleStatus {
     Apart = "Apartado",
     Pending = "Pendiente",
     Paid = "Pagado",

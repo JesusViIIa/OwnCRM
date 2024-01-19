@@ -14,8 +14,16 @@ const customerSchema = new Schema<ICustomer>({
         type: Schema.Types.ObjectId,
         ref: "Account"
     }],
+    purchases: [{
+        type: Schema.Types.ObjectId,
+        ref: "Sale"
+    }],
     lastName: {
         type: String
+    },
+    active: {
+        type: Boolean,
+        default: true
     },
     createdAt: {
         type: Date,

@@ -1,5 +1,5 @@
 import { Schema, model } from "mongoose";
-import { ITransaction } from "../interfaces/ITransaction";
+import { ITransaction, eStatusTransaction } from "../interfaces/ITransaction";
 const transactionSchema = new Schema<ITransaction>({
     amount: {
         type: Number,
@@ -7,18 +7,34 @@ const transactionSchema = new Schema<ITransaction>({
     },
     concept: {
         type: String,
-        required: true
     },
     type: {
         type: Schema.Types.ObjectId,
         ref: "TypeTransaction",
         required: true
     },
+    status: {
+        type: String,
+        enum: eStatusTransaction,
+        default: eStatusTransaction.pending
+    },
     createdAt: {
         type: Date,
         default: Date.now
     },
-    updatedAt: Date
+    updatedAt: Date,
+    active: {
+        type: Boolean,
+        default: true
+    },
+    sale: {
+        type: Schema.Types.ObjectId,
+        ref: "Sale"
+    },
+    account: {
+        type: Schema.Types.ObjectId,
+        ref: "Account"
+    },
 }, {
     timestamps: true
 })

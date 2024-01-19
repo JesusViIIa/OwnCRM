@@ -17,7 +17,11 @@ const typeTransactionSchema = new Schema<ITypeTransaction>({
         type: Date,
         default: Date.now
     },
-    updatedAt: Date
+    updatedAt: Date,
+    active: {
+        type: Boolean,
+        default: true
+    },
 }, {
     timestamps: true
 })

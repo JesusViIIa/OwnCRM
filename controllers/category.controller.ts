@@ -1,8 +1,8 @@
-import { createCategoryService } from "../services/CategoryServices.ts/createCategory.service";
-import { deleteCategoryService } from "../services/CategoryServices.ts/deleteCategory.service";
-import { getCategoriesService } from "../services/CategoryServices.ts/getCategories.service";
-import { getCategoryByIdService } from "../services/CategoryServices.ts/getCategoryById.service";
-import { updateCategoryService } from "../services/CategoryServices.ts/updateCategory.service";
+import { createCategoryService } from "../services/CategoryServices/createCategory.service";
+import { deleteCategoryService } from "../services/CategoryServices/deleteCategory.service";
+import { getCategoriesService } from "../services/CategoryServices/getCategories.service";
+import { getCategoryByIdService } from "../services/CategoryServices/getCategoryById.service";
+import { updateCategoryService } from "../services/CategoryServices/updateCategory.service";
 
 export class CategoryController {
   constructor() {}

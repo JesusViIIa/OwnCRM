@@ -1,5 +1,5 @@
 import { Schema, model } from "mongoose";
-import { ISale } from "../interfaces/ISale";
+import { ISale, eSaleStatus } from "../interfaces/ISale";
 const saleSchema = new Schema<ISale>(
   {
     products: [
@@ -22,7 +22,8 @@ const saleSchema = new Schema<ISale>(
     },
     status: {
       type: String,
-      required: true,
+      enum: eSaleStatus,
+      default: eSaleStatus.Pending,
     },
     totalProducts: {
       type: Number,
@@ -32,12 +33,15 @@ const saleSchema = new Schema<ISale>(
       type: Schema.Types.ObjectId,
       ref: "Account",
     },
-
     createdAt: {
       type: Date,
       default: Date.now,
     },
     updatedAt: Date,
+    active: {
+      type: Boolean,
+      default: true,
+    },
   },
   {
     timestamps: true,

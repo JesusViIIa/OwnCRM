@@ -1,9 +1,9 @@
 import { IProduct } from "./IProduct";
 
  export interface IProductTransaction {
-    id: string;
+    _id: string;
     description: string;
-    type: IProductTransactionType;
+    type: eProductTransactionType;
     quantity: number;
     product: IProduct;
     createdAt: Date;
@@ -11,8 +11,9 @@ import { IProduct } from "./IProduct";
  }
 
 
- enum IProductTransactionType {
+ export enum eProductTransactionType {
     INCOME = 'Entrada',
     OUTCOME = 'Salida',
     CREATE = 'Creado',
+    CANCELED = 'Cancelado',
  }

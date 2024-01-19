@@ -3,7 +3,7 @@ import { IProductTransaction } from "./IProductTransaction";
 
 // costo al publico y costo de produccion
 export interface IProduct {
-    id: string;
+    _id: string;
     name: string;
     description: string;
     price: number;

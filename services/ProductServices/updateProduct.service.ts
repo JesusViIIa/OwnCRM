@@ -1,4 +1,5 @@
 import { IProduct } from "../../interfaces/IProduct";
+import { eProductTransactionType } from "../../interfaces/IProductTransaction";
 import Product from "../../models/Product";
 import ProductTransaction from "../../models/ProductTransaction";
 
@@ -11,8 +12,8 @@ export const updateProductService = async (product: IProduct, id: string) => {
     if (diff !== 0) {
       const h = await ProductTransaction.create({
         description: "Inventario Actualizado",
-        type: diff > 0 ? "OUTCOME" : "INCOME",
-        quantity: Math.abs(diff),
+        type: diff > 0 ? eProductTransactionType.OUTCOME : eProductTransactionType.INCOME,
+        quantity: diff,
         product: productToUpdate._id,
       });
       await h.save();
