@@ -1,5 +1,6 @@
 import { IProduct } from "../../interfaces/IProduct";
 import Product from "../../models/Product";
+import ProductTransaction from "../../models/ProductTransaction";
 
 export const createProductService = async (product: IProduct) => {
   try {
@@ -12,6 +13,22 @@ export const createProductService = async (product: IProduct) => {
       },
     });
     productCreated.save();
+
+
+    // agregar historial
+    const h = await ProductTransaction.create({
+      description: "Producto Agregado",
+      type: "CREATE",
+      quantity: product.quantity,
+      product: productCreated._id,
+    })
+    await h.save();
+    console.log(h)
+
+
+
+
+
     return productCreated;
   } catch (error) {
     console.log(error);

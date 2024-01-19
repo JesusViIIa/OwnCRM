@@ -9,7 +9,10 @@ const categorySchema = new Schema<ICategory>({
         type: Schema.Types.ObjectId,
         ref: "Category",
     },
-    createdAt: Date,
+    createdAt: {
+        type: Date,
+        default: Date.now
+    },
     updatedAt: Date,
     });
 export default model<ICategory>("Category", categorySchema);
