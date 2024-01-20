@@ -1,12 +1,12 @@
 import { eProductTransactionType } from "../../interfaces/IProductTransaction";
 import { ISale, eSaleStatus } from "../../interfaces/ISale";
+import Product from "../../models/Product";
 import ProductTransaction from "../../models/ProductTransaction";
 import Sale from "../../models/Sale";
 import { deleteAccountService } from "../AccountServices/deleteAccount.service";
 
 export const updateSaleService = async (sale: ISale, id: string) => {
   try {
-
     const saleCreated = await Sale.findByIdAndUpdate(id, {
       ...sale,
     });
@@ -14,21 +14,23 @@ export const updateSaleService = async (sale: ISale, id: string) => {
     if (sale.status === eSaleStatus.Canceled) {
       await deleteAccountService(sale._id);
 
-
-
-      await saleCreated.populate("products")
+      await saleCreated.populate("products");
       // agregar historial
       saleCreated.products?.forEach(async (p) => {
-      const h = await ProductTransaction.create({
-        description: "Venta cancelada",
-        type: eProductTransactionType.CANCELED,
-        quantity: +1,
-        // @ts-ignore
-        product: p._id,
+        const h = await ProductTransaction.create({
+          description: "Venta cancelada",
+          type: eProductTransactionType.CANCELED,
+          quantity: +1,
+          // @ts-ignore
+          product: p._id,
+        });
+        await h.save();
+        console.log(h);
+        // update product quantity
+        await Product.findByIdAndUpdate(p, {
+          $inc: { quantity: -1 },
+        });
       });
-      await h.save();
-      console.log(h);
-    });
     }
     return saleCreated;
   } catch (error) {

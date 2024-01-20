@@ -2,6 +2,7 @@ import { eAccountStatus } from "../../interfaces/IAccount";
 import { eProductTransactionType } from "../../interfaces/IProductTransaction";
 import { ISale, eSaleStatus } from "../../interfaces/ISale";
 import { eStatusTransaction } from "../../interfaces/ITransaction";
+import Product from "../../models/Product";
 import ProductTransaction from "../../models/ProductTransaction";
 import Sale from "../../models/Sale";
 import { createAccountService } from "../AccountServices/createAccounts.service";
@@ -74,6 +75,10 @@ export const createSaleService = async (sale: ISale) => {
       });
       await h.save();
       console.log(h);
+      // update product quantity
+      await Product.findByIdAndUpdate(p, {
+        $inc: { quantity: -1 },
+      });
     });
 
     const saleCreated = await newSale.save();

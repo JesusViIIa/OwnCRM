@@ -38,6 +38,7 @@ export const updateCheckStatusAccount = async (id: string) => {
         
     }
     catch (error) {
-        throw new Error(error);
+        console.log(error)
+        return error;
     }
 };

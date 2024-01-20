@@ -15,6 +15,7 @@ export const deleteTransactionService = async (id:string) => {
         transaction.save();
         return transaction;
     } catch (error) {
+        console.log("errorrrrrrrrrrr")
         console.log(error);
     }
 }

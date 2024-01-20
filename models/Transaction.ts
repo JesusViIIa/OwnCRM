@@ -11,7 +11,6 @@ const transactionSchema = new Schema<ITransaction>({
     type: {
         type: Schema.Types.ObjectId,
         ref: "TypeTransaction",
-        required: true
     },
     status: {
         type: String,

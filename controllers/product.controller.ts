@@ -9,27 +9,43 @@ export class ProductController {
   constructor() {}
 
   async getProducts(req, res: Response) {
-    const products = await getProductsService();
+    try {
+      const products = await getProductsService();
     return res.json(products);
+    } catch (error) {
+      res.status(500).json({ message: error.message });
+    }
   }
 
   async getProduct(req, res) {
-    const { id } = req.params;
+    try {
+      const { id } = req.params;
     const product = await getProductByIdService(id);
     return res.json(product);
+    } catch (error) {
+      res.status(500).json({ message: error.message });
+    }
   }
 
   async createProduct(req, res) {
-    const { body } = req;
+    try {
+      const { body } = req;
     const product =await createProductService(body);
     return res.json(product);
+    } catch (error) {
+      res.status(500).json({ message: error.message });
+    }
   }
 
   async updateProduct(req, res) {
-    const { id } = req.params;
+    try {
+      const { id } = req.params;
     const { body } = req;
     const product = await updateProductService(body, id);
     res.json(product);
+    } catch (error) {
+      res.status(500).json({ message: error.message });
+    }
   }
 
   async deleteProduct(req, res) {
