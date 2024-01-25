@@ -24,9 +24,9 @@ export const deleteSaleService = async (id: string) => {
         });
         await h.save();
         console.log(h);
-        // update product quantity
+        // update product quantity add
         await Product.findByIdAndUpdate(p, {
-          $inc: { quantity: -1 },
+          $inc: { quantity: +1 },
         });
       });
     return sale;

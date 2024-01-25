@@ -58,7 +58,7 @@ export const createSaleService = async (sale: ISale) => {
         sale: newSale._id,
         status: eStatusTransaction.completed,
         //@ts-ignore
-        type: "65aab9cdc4389fce371552ad",
+        type: "65b1e01ebbdb060ed96ae38d",
         concept: `Venta realizada #${newSale._id}`,
       });
     }

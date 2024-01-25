@@ -1,10 +1,13 @@
 import Product from "../../models/Product";
 
-export const getProductsService = async () => {
+export const getProductsService = async (
+    search: string | undefined
+) => {
     try {
         // populate category and CategoryFather of category
         const products = await Product.find({
-            active: true
+            active: true,
+            name: { $regex: search || "", $options: "i" },
         }).populate({
             path: "category",
             populate: {

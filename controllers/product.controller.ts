@@ -10,7 +10,8 @@ export class ProductController {
 
   async getProducts(req, res: Response) {
     try {
-      const products = await getProductsService();
+      const {search} = req.query;
+      const products = await getProductsService(search);
     return res.json(products);
     } catch (error) {
       res.status(500).json({ message: error.message });
